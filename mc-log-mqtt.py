@@ -5,7 +5,7 @@
 
 # requirements
 # pip3 install paho-mqtt
-# pip3 install tailer
+# pip3 install sh
 
 import paho.mqtt.client as mqtt
 from time import time, sleep
@@ -13,7 +13,7 @@ import signal
 import sys
 import re
 import config    # my local config file
-import tailer
+import sh
 
 # configuration
 base_topic = 'PI1'
@@ -28,9 +28,7 @@ def signal_handler(signal, frame):
     # cleanup
     print("mc-log-mqtt ending.")
     mqtt_client.disconnect()
-    inputf.close()
     sys.exit(0)
-
 
 signal.signal(signal.SIGINT, signal_handler)
 interrupted = False
@@ -56,12 +54,8 @@ else:
 #topic = '{}/#'.format(base_topic)
 # topic to be defined by the command?
 
-# open file for reading
-inputf = open(input_filename, 'r')
-
-
 # main loop
-for line in tailer.follow(inputf):    # waits for new line
+for line in sh.tail("-0f", input_filename, _iter=True):
    
     command = re.search('/tell mqtt .*', line)  # find relevant part
     if command:
