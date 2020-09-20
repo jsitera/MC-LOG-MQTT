@@ -16,7 +16,7 @@ import config    # my local config file
 import sh
 
 # configuration
-base_topic = 'PI1'
+base_topic = 'MC1'
 mqtt_hostname = config.mqtt_hostname
 mqtt_clientname = 'mc-log-mqtt'
 input_filename = config.input_filename
@@ -48,11 +48,8 @@ else:
   print("MQTT connection established.")
 
 
-#mqtt_client.loop_start()
-#sleep(1)
-
-#topic = '{}/#'.format(base_topic)
-# topic to be defined by the command?
+mqtt_client.loop_start()
+sleep(1)
 
 # main loop
 for line in sh.tail("-0f", input_filename, _iter=True):
@@ -67,4 +64,4 @@ for line in sh.tail("-0f", input_filename, _iter=True):
         if topic and message:
 
             print("Sending MQTT message: ", topic, "> ",  message)
-            mqtt_client.publish(topic, message)
+            mqtt_client.publish(base_topic+"/"+topic, message)
