@@ -48,6 +48,8 @@ else:
   print("MQTT connection established.")
 
 
+print("LOG filename: ", input_filename)
+
 mqtt_client.loop_start()
 sleep(1)
 
