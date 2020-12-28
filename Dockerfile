@@ -16,4 +16,4 @@ COPY config.py /workdir
 # shared data of minecraft server
 VOLUME ["/data"]
 
-#ENTRYPOINT [/workdir/mc-log-mqtt.py]
+ENTRYPOINT ["python3", "/workdir/mc-log-mqtt.py"]
