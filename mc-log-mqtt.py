@@ -61,13 +61,11 @@ sleep(1)
 
 # main loop
 for line in sh.tail("-0f", input_filename, _iter=True):
-   
-    command = re.search('/tell mqtt .*', line)  # find relevant part
-    if command:
-        (tell, sep, args) = command.group().partition(" ")
-        (mqtt, sep, args) = args.partition(" ")
-        
-        (topic, sep, message) = args.partition(" ")
+
+    tokens = re.findall(r'\[ESPblock\((.*)\)] Status: Power = (.*)', line)  # find relevant part
+    if tokens:
+        topic=tokens[0][0]
+        message=tokens[0][1]
 
         if topic and message:
 
