@@ -6,20 +6,25 @@
 # requirements
 # pip3 install paho-mqtt
 # pip3 install sh
+# pip3 install python-dotenv
 
 import paho.mqtt.client as mqtt
 from time import time, sleep
 import signal
 import sys
 import re
-import config    # my local config file
 import sh
+import os
+from dotenv import load_dotenv
 
 # configuration
+load_dotenv()  # take environment variables from .env.
+
 base_topic = 'MC1'
-mqtt_hostname = config.mqtt_hostname
+mqtt_hostname = os.getenv('MQTT_HOSTNAME')
+mqtt_port = os.getenv('MQTT_PORT')
 mqtt_clientname = 'mc-log-mqtt'
-input_filename = config.input_filename
+input_filename = os.getenv('INPUT_FILENAME')
 
 
 
@@ -35,6 +40,7 @@ interrupted = False
 
 print("This is Minecraft log parser sending MQTT messages for every")
 print("line containing /tell mqtt topic message")
+print("MQTT hostname: ", mqtt_hostname, "MQTT port: ", mqtt_port)
     
 # MQTT connection initialization
 mqtt_client = mqtt.Client()
