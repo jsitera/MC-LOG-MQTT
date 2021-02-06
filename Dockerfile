@@ -11,7 +11,6 @@ COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY mc-log-mqtt.py /workdir
-COPY config.py /workdir
 
 # shared data of minecraft server
 VOLUME ["/data"]
