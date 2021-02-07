@@ -22,8 +22,8 @@ load_dotenv()  # take environment variables from .env.
 
 base_topic = 'MC1'
 mqtt_hostname = os.getenv('MQTT_HOSTNAME')
-mqtt_port = os.getenv('MQTT_PORT')
-mqtt_clientname = 'mc-log-mqtt'
+mqtt_port = int(os.getenv('MQTT_PORT'))
+#mqtt_clientname = 'mc-log-mqtt'
 input_filename = os.getenv('INPUT_FILENAME')
 
 
@@ -41,23 +41,28 @@ interrupted = False
 print("This is Minecraft log parser sending MQTT messages for every")
 print("line containing /tell mqtt topic message")
 print("MQTT hostname: ", mqtt_hostname, "MQTT port: ", mqtt_port)
+
+
+def on_connect(client, userdata, flags, rc):
+    if rc==0:
+        client.connected_flag=True
+        print("MQTT on_connect callback: connected ok")
+    else:
+        print("MQTT on_connect callback: Bad connection Returned code=",rc)
     
 # MQTT connection initialization
 mqtt_client = mqtt.Client()
-
-try:
-  mqtt_client.connect(mqtt_hostname,port=80)
-except:
-  print("MQTT connection error.")
-  sys.exit(1)
-else:
-  print("MQTT connection established.")
+mqtt_client.on_connect=on_connect  #bind call back function
+mqtt_client.loop_start()
+mqtt.Client.connected_flag=False
+print("Connecting to MQTT broker ",mqtt_hostname)
+mqtt_client.connect(mqtt_hostname,port=mqtt_port)
+while not mqtt_client.connected_flag: #wait in loop
+    print("Wait for MQTT callback")
+    sleep(1)
 
 
 print("LOG filename: ", input_filename)
-
-mqtt_client.loop_start()
-sleep(1)
 
 # main loop
 for line in sh.tail("-0f", input_filename, _iter=True):
