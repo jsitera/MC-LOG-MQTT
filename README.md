@@ -1,10 +1,10 @@
 # MC-LOG-MQTT
-MQTT sender feeded via minecraft server log
+This component reads a Minecraft server log and sends MQTT messages. It is a part of Minecraft IoT project, a gateway between the Minecraft server and anything via MQTT standard.
 # description
 Allows to send MQTT messages from unmodified Minecraft server. 
-This Minecraft log parser sends MQTT messages for every line containging /tell mqtt topic message.
+Acts as a Minecraft log parser and sends a MQTT message for every line containging predefined structure. There is a regexp describing the line structure and finding the topic and message in the log line.
 # How to use it
-Just use following command in your command block:
-`/tell mqtt topic message`
+You can use a command say or tell in your command block or in fuctions.
 # How to setup it
-Create config.py file and start the parser as a deamon. It can be stopped using CTRL-C.
+The configuration is based on https://github.com/theskumar/python-dotenv Use environment variables or .env file. See https://github.com/jsitera/MC-LOG-MQTT/blob/master/README.docker.md
+Start the parser as a deamon. It can be stopped using CTRL-C.
