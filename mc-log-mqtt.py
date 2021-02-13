@@ -39,7 +39,7 @@ signal.signal(signal.SIGINT, signal_handler)
 interrupted = False
 
 print("This is Minecraft log parser sending MQTT messages for every")
-print("line containing /tell mqtt topic message")
+print("line containing predefined message described by regexp")
 print("MQTT hostname: ", mqtt_hostname, "MQTT port: ", mqtt_port)
 
 
