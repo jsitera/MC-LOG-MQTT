@@ -63,6 +63,11 @@ while not mqtt_client.connected_flag: #wait in loop
 
 
 print("LOG filename: ", input_filename)
+# wait if the input_filename does't exists
+while not os.path.exists(input_filename):
+    print("Wait for LOG file to exist")
+    sleep(1)
+print("Entering the tail loop")
 
 # main loop
 for line in sh.tail("-0f", input_filename, _iter=True):
