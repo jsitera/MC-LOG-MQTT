@@ -20,7 +20,7 @@ from dotenv import load_dotenv
 # configuration
 load_dotenv()  # take environment variables from .env.
 
-base_topic = 'MC1'
+base_topic = 'PI1'
 mqtt_hostname = os.getenv('MQTT_HOSTNAME')
 mqtt_port = int(os.getenv('MQTT_PORT'))
 #mqtt_clientname = 'mc-log-mqtt'
@@ -72,12 +72,14 @@ print("Entering the tail loop")
 # main loop
 for line in sh.tail("-0f", input_filename, _iter=True):
 
-    tokens = re.findall(r'\[ESPblock\((.*)\)] Status: Power = (.*)', line)  # find relevant part
+    tokens = re.findall(r'\[ESPblock\((.*)\)/(.*)\] Status: Power = (.*)', line)  # find relevant part
     if tokens:
         topic=tokens[0][0]
-        message=tokens[0][1]
+        subtopic=tokens[0][1]
+        message=tokens[0][2]
 
         if topic and message:
 
-            print("Sending MQTT message: ", topic, "> ",  message)
-            mqtt_client.publish(base_topic+"/"+topic, message)
+            print("Sending MQTT message: ", topic, "/", subtopic, "> ",  message)
+            print(base_topic+"/ESPblock("+topic+")/"+subtopic, message)
+            mqtt_client.publish(base_topic+"/ESPblock("+topic+")/"+subtopic, message)
