@@ -72,7 +72,7 @@ print("Entering the tail loop")
 # main loop
 for line in sh.tail("-0f", input_filename, _iter=True):
 
-    tokens = re.findall(r'\[ESPblock\((.*)\)/(.*)\] Status: Power = (.*)', line)  # find relevant part
+    tokens = re.findall(r'UUID: (.*), Channel: (.*), Power: (.*)', line)  # find relevant part
     if tokens:
         topic=tokens[0][0]
         subtopic=tokens[0][1]
@@ -81,5 +81,5 @@ for line in sh.tail("-0f", input_filename, _iter=True):
         if topic and message:
 
             print("Sending MQTT message: ", topic, "/", subtopic, "> ",  message)
-            print(base_topic+"/ESPblock("+topic+")/"+subtopic, message)
-            mqtt_client.publish(base_topic+"/ESPblock("+topic+")/"+subtopic, message)
+            print(base_topic+"/"+topic+"/"+subtopic, message)
+            mqtt_client.publish(base_topic+"/"+topic+"/"+subtopic, message)
