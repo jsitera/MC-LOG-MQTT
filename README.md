@@ -10,3 +10,7 @@ You can use a command say or tell in your command block or in fuctions.
 # How to setup it
 The configuration is based on https://github.com/theskumar/python-dotenv Use environment variables or .env file. See https://github.com/jsitera/MC-LOG-MQTT/blob/master/README.docker.md
 Start the parser as a deamon. It can be stopped using CTRL-C.
+# Build and publish docker image automation
+There is available docker image on hub.docker.io called sitera/mc-log-mqtt.
+
+On each commit to this repository the build and publish action is automatically invoked.
