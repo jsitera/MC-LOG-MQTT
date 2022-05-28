@@ -81,5 +81,5 @@ for line in sh.tail("-0f", input_filename, _iter=True):
         if topic and message:
 
             print("Sending MQTT message: ", topic, "/", subtopic, "> ",  message)
-            print(base_topic+"/ESPBlock/"+topic+"/"+subtopic, message)
-            mqtt_client.publish(base_topic+"/ESPBlock/"+topic+"/"+subtopic, message)
+            print(base_topic+"/ESPblock/"+topic+"/"+subtopic, message)
+            mqtt_client.publish(base_topic+"/ESPblock/"+topic+"/"+subtopic, message)
