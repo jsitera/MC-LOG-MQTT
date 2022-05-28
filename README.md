@@ -1,3 +1,5 @@
+[![Build and publish docker image](https://github.com/jsitera/MC-LOG-MQTT/actions/workflows/build-and-publish.yml/badge.svg)](https://github.com/jsitera/MC-LOG-MQTT/actions/workflows/build-and-publish.yml)
+
 # MC-LOG-MQTT
 This component reads a Minecraft server log and sends MQTT messages. It is a part of Minecraft IoT project, a gateway between the Minecraft server and anything via MQTT standard.
 # description
