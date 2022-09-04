@@ -11,5 +11,6 @@ docker logs mc-log-mqtt
 Run interactively (use with screen)
 docker run -it --env-file=.env -v /path/to/minecraft/server-data:/data sitera/mc-log-mqtt
 
-Test container
+Test container (runs bash inside container)
 docker run -it --env-file=.env -v /path/to/minecraft/server-data:/data --entrypoint /bin/bash sitera/mc-log-mqtt
+to test the script run it ./mc-log-mqtt.py
