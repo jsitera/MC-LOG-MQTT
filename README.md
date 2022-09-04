@@ -2,9 +2,10 @@
 
 # MC-LOG-MQTT
 This component reads a Minecraft server log and sends MQTT messages. It is a part of Minecraft IoT project, a gateway between the Minecraft server and anything via MQTT standard.
-# description
+# Description
 Allows to send MQTT messages from unmodified Minecraft server. 
 Acts as a Minecraft log parser and sends a MQTT message for every line containging predefined structure. There is a regexp describing the line structure and finding the topic and message in the log line.
+The script implemented in Python reads the logfile in a efficient way with minimal delay. It is implemented via inotify. It also supports the rotation of the logfile (detects it and reopens the logfile).
 # How to use it
 See https://github.com/jirisitera/ESPblock for the Minecraft part (Minecraft mod providing the ESPblock, a block able to comunicate via MQTT with anything).
 You can also use a command say or tell in your command block or in fuctions.
