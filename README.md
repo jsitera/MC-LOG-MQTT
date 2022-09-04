@@ -6,7 +6,8 @@ This component reads a Minecraft server log and sends MQTT messages. It is a par
 Allows to send MQTT messages from unmodified Minecraft server. 
 Acts as a Minecraft log parser and sends a MQTT message for every line containging predefined structure. There is a regexp describing the line structure and finding the topic and message in the log line.
 # How to use it
-You can use a command say or tell in your command block or in fuctions.
+See https://github.com/jirisitera/ESPblock for the Minecraft part (Minecraft mod providing the ESPblock, a block able to comunicate via MQTT with anything).
+You can also use a command say or tell in your command block or in fuctions.
 # How to setup it
 The configuration is based on https://github.com/theskumar/python-dotenv Use environment variables or .env file. See https://github.com/jsitera/MC-LOG-MQTT/blob/master/README.docker.md
 Start the parser as a deamon. It can be stopped using CTRL-C.
